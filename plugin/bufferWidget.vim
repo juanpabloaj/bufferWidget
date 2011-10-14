@@ -1,6 +1,6 @@
 " File: bufferWidget.vim
 " Author: juanpablo <jpabloaj@gmail.com>
-" Description: 
+" Description: statusline widget for number of buffers
 if !exists('g:buffer_widget_view')
 	let g:buffer_widget_view='small'
 endif
