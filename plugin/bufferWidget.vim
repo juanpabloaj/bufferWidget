@@ -7,11 +7,20 @@ endif
 fun! BufferWidget() "{{{
 	let widget=''
 	if g:buffer_widget_view == 'small'
-		let widget = bufnr('%').'/'.len(filter(range(1, bufnr('$')),'buflisted(v:val)'))
+		let nbfs =len(filter(range(1, bufnr('$')),'buflisted(v:val)'))
+		if nbfs == 1
+			let widget = bufnr('%')
+		else
+			let widget = bufnr('%').'/'.len(filter(range(1, bufnr('$')),'buflisted(v:val)'))
+		endif
 	else
 		for i in filter(range(1, bufnr('$')), 'buflisted(v:val)')
 			if g:buffer_widget_view=='numbers'
-				let widget=widget.i
+				if i == bufnr('%')
+					let widget=widget.i
+				else
+					let widget=widget.'['.i.']'
+				endif
 			elseif g:buffer_widget_view == 'bars'
 				if i == bufnr('%')
 					let widget=widget.i
