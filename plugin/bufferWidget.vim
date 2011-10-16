@@ -4,6 +4,9 @@
 if !exists('g:buffer_widget_view')
 	let g:buffer_widget_view='small'
 endif
+if !exists('g:buffer_widget_bars') || &encoding!='utf-8'
+	let g:buffer_widget_bars='|'
+endif
 fun! BufferWidget() "{{{
 	let widget=''
 	if g:buffer_widget_view == 'small'
@@ -25,7 +28,7 @@ fun! BufferWidget() "{{{
 				if i == bufnr('%')
 					let widget=widget.i
 				else
-					let widget=widget.'|'
+					let widget=widget.g:buffer_widget_bars
 				endif
 			endif
 		endfor
